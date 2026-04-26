@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Project - Portfolio Admin</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background-color: #f8fafc;
+            color: #334155;
+        }
+        
+        .header {
+            background: white;
+            border-bottom: 1px solid #e2e8f0;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .header h1 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #1e293b;
+        }
+        
+        .btn {
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            text-decoration: none;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s;
+        }
+        
+        .btn-secondary {
+            background: white;
+            color: #64748b;
+            border: 1px solid #d1d5db;
+        }
+        
+        .btn-secondary:hover {
+            background: #f8fafc;
+            border-color: #94a3b8;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .form-container {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+            padding: 2rem;
+        }
+        
+        .form-header {
+            margin-bottom: 2rem;
+        }
+        
+        .form-header h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #1e293b;
+            margin-bottom: 0.5rem;
+        }
+        
+        .form-header p {
+            color: #64748b;
+            font-size: 0.875rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #374151;
+            font-weight: 500;
+            font-size: 0.875rem;
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            font-size: 0.875rem;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+        
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+        
+        .form-group .help-text {
+            margin-top: 0.25rem;
+            font-size: 0.75rem;
+            color: #6b7280;
+        }
+        
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .checkbox-group input[type="checkbox"] {
+            width: auto;
+        }
+        
+        .form-actions {
+            display: flex;
+            gap: 1rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #f1f5f9;
+        }
+        
+        .alert {
+            padding: 0.75rem 1rem;
+            border-radius: 6px;
+            margin-bottom: 1rem;
+            font-size: 0.875rem;
+        }
+        
+        .alert-success {
+            background-color: #f0fdf4;
+            color: #166534;
+            border: 1px solid #bbf7d0;
+        }
+        
+        .alert-error {
+            background-color: #fef2f2;
+            color: #991b1b;
+            border: 1px solid #fecaca;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1>Add New Project</h1>
+        <a href="/admin" class="btn btn-secondary">Back to Dashboard</a>
+    </header>
+    
+    <main class="container">
+        <div class="form-container">
+            <div class="form-header">
+                <h2>Project Details</h2>
+                <p>Fill in the information below to add a new project to your portfolio.</p>
+            </div>
+            
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ 'success' if category == 'success' else 'error' }}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+            
+            <form method="POST" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="title">Project Title *</label>
+                    <input type="text" id="title" name="title" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="description">Description *</label>
+                    <textarea id="description" name="description" required 
+                              placeholder="Describe your project, what problem it solves, and your role in it."></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="tech_stack">Tech Stack *</label>
+                    <input type="text" id="tech_stack" name="tech_stack" required 
+                           placeholder="React, Node.js, MongoDB, etc. (comma-separated)">
+                    <div class="help-text">Enter technologies separated by commas</div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="github_link">GitHub Link</label>
+                    <input type="url" id="github_link" name="github_link" 
+                           placeholder="https://github.com/username/repo">
+                </div>
+                
+                <div class="form-group">
+                    <label for="demo_link">Live Demo Link</label>
+                    <input type="url" id="demo_link" name="demo_link" 
+                           placeholder="https://your-demo-url.com">
+                </div>
+                
+                <div class="form-group">
+                    <label for="image">Project Image</label>
+                    <input type="file" id="image" name="image" accept="image/*">
+                    <div class="help-text">Recommended size: 800x400px. Max size: 16MB.</div>
+                </div>
+                
+                <div class="form-group">
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="featured" name="featured">
+                        <label for="featured">Feature this project</label>
+                    </div>
+                    <div class="help-text">Featured projects will be highlighted on your portfolio</div>
+                </div>
+                
+                <div class="form-actions">
+                    <a href="/admin" class="btn btn-secondary">Cancel</a>
+                    <button type="submit" class="btn btn-primary">Add Project</button>
+                </div>
+            </form>
+        </div>
+    </main>
+</body>
+</html>

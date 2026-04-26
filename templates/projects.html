@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects - Navadeep's Portfolio</title>
+    <meta name="description" content="Browse through my portfolio of web development projects and applications.">
+    
+    <!-- Preconnect to font domains -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Google Fonts - Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/projects.css') }}">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav" id="navbar">
+        <div class="nav-container">
+            <a href="/" class="nav-logo">Navadeep</a>
+            <ul class="nav-menu" id="nav-menu">
+                <li class="nav-item">
+                    <a href="/" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/projects" class="nav-link active">Projects</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/#skills" class="nav-link">Skills</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/#about" class="nav-link">About</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/#contact" class="nav-link">Contact</a>
+                </li>
+            </ul>
+            <div class="nav-toggle" id="nav-toggle">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Projects Header -->
+        <section class="projects-header">
+            <div class="container">
+                <h1 class="page-title">My Projects</h1>
+                <p class="page-subtitle">A collection of web applications and projects I've built to solve real-world problems.</p>
+            </div>
+        </section>
+
+        <!-- Projects Grid -->
+        <section class="projects-full">
+            <div class="container">
+                <div class="projects-grid" id="projects-container">
+                    <!-- Projects will be loaded dynamically here -->
+                    <div class="loading">
+                        <div class="spinner"></div>
+                        <p>Loading projects...</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+            </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Navadeep. Built with Python, Flask, and lots of ☕</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="{{ url_for('static', filename='js/projects.js') }}"></script>
+</body>
+</html>
